@@ -68,10 +68,10 @@ NOTE : Make sure you grab the follwing info generate by "build make"
 ```
 == Seeding database ==
 email : admin@barong.io
-Admin credentials: dbfb0775ec32d7d2db51daa1da51d9aa2deaeba9
+Admin credentials: dbfxxxxxec32d7d2db51daxxxxx1d9aa2deaeba9
 Name: Local Peatio
-Application ID: a68be319fca51caca60eed5711226e568bd1c1d13ff452b945515f1a6ffbaca4
-Secret: ab80e2c843861c4d23e63f5472cd1c9ee6f55e388863e21f22b03a9093977f29
+Application ID: a68be319fcaxxxxxa60eed5711226xxxxxd1c1d13fxxxxx945515f1a6ffbaca4
+Secret: ab80e2c843xxxxxxxxx3f5472cd1cxxxxx5e388863e21f22b03a9xxxxx7f29
 ```
 3. Run the application: `make run`
 
@@ -200,7 +200,7 @@ server {
   }
 
   location / {
-    proxy_pass http://127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:8000;
   }
 }
 ```
