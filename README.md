@@ -10,6 +10,7 @@ Peatio workbench is an easy way to start Peatio development environment.
 
 ### Install Dependencies
 
+```
 sudo apt-get install \
   apt-transport-https \
   ca-certificates \
@@ -17,11 +18,12 @@ sudo apt-get install \
   software-properties-common \
   build-essential \
   git
-
+```
 
 
 ### Install Docker
 
+```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo apt-key fingerprint 0EBFCD88
@@ -35,18 +37,21 @@ sudo apt-get update
 
 sudo apt-get install docker-ce
 
+# Check that docker is properly installed
 docker --version 
-
+```
 
 
 ### Install Docker Compose
 
+```
 sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
 
+# Check that docker is properly installed
 docker-compose --version
-
+```
 
 
 
@@ -68,19 +73,17 @@ Name: Local Peatio
 Application ID: a68be319fca51caca60eed5711226e568bd1c1d13ff452b945515f1a6ffbaca4
 Secret: ab80e2c843861c4d23e63f5472cd1c9ee6f55e388863e21f22b03a9093977f29
 ```
+3. Run the application: `make run`
 
-3. run the application: `make run`
-
-4. Add peatio and barong into your /etc/hosts
-
-If you run peatio locally, to have barong login working with peatio you will need to add this to your `/etc/hosts`. 
+4. A) If you run peatio locally, to have barong login working with peatio you will need to add this to your `/etc/hosts`. 
 
 ```
 0.0.0.0 peatio
 0.0.0.0 barong
 ```
 
-If you run from a server, just make sure to update the URL_HOST in `docker-compose.ymal` 
+4. B) If you run from a server, just make sure to update the URL_HOST in `docker-compose.ymal` 
+
 ```
 URL_HOST: ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000
 ```
@@ -95,8 +98,10 @@ URL_HOST: ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000
 
 1. In `docker-compose.yaml`, set the newly created application credentials:
 
-      TWILIO_ACCOUNT_SID: AC29362bd3c537d5fae4addf672ff85f6c
-      TWILIO_AUTH_TOKEN: 9009ca5ad41c9499b55e7be3366d4f0e
+```
+TWILIO_ACCOUNT_SID: <my_twilio_sid>
+TWILIO_AUTH_TOKEN: <my_twilio_token>
+```
 
 2. Start barong: `docker-compose up -d barong`
 
@@ -110,7 +115,7 @@ URL_HOST: ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000
 
 
 4. Get the creds you got from the `make run`
-3. Sign in at [barong:8001](http://barong:8001), then go to [/admin](http://barong:8001/admin)
+3. Sign in at [barong:8001](http://barong:8001) (or http://<my_server>:8000 if you run from a server), then go to [/admin](http://barong:8001/admin)
    and navigate to [Applications](http://barong:8001/oauth/applications)
 4. Create new application with the following callback url `http://peatio:8000/auth/barong/callback`
 5. Make sure you then sign-in using admin@peatio.io and validate your phone number.
