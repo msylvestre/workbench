@@ -10,7 +10,7 @@ Peatio workbench is an easy way to start Peatio development environment.
 
 ### Install Dependencies
 
-```
+```shell
 sudo apt-get install \
   apt-transport-https \
   ca-certificates \
@@ -23,7 +23,7 @@ sudo apt-get install \
 
 ### Install Docker
 
-```
+```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo apt-key fingerprint 0EBFCD88
@@ -44,7 +44,7 @@ docker --version
 
 ### Install Docker Compose
 
-```
+```shell
 sudo curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
@@ -63,9 +63,9 @@ docker-compose --version
 1. Recursive clone : git clone --recursive https://github.com/rubykube/workbench.git
 2. Build the images: `make build`
 
-NOTE : Make sure you grab the follwing info generate by "build make"
+- NOTE : Make sure you grab the follwing info generate by "build make"
 
-```
+```shell
 == Seeding database ==
 email : admin@barong.io
 Admin credentials: dbfxxxxxec32d7d2db51daxxxxx1d9aa2deaeba9
@@ -73,19 +73,20 @@ Name: Local Peatio
 Application ID: a68be319fcaxxxxxa60eed5711226xxxxxd1c1d13fxxxxx945515f1a6ffbaca4
 Secret: ab80e2c843xxxxxxxxx3f5472cd1cxxxxx5e388863e21f22b03a9xxxxx7f29
 ```
+
 3. Run the application: `make run`
 
-4. A) If you run peatio locally, to have barong login working with peatio you will need to add this to your `/etc/hosts`. 
+4. A) If you run peatio locally, to have barong login working with peatio you will need to add this to your `/etc/hosts`.
 
-```
+```shell
 0.0.0.0 peatio
 0.0.0.0 barong
 ```
 
 4. B) If you run from a server, just make sure to update the URL_HOST in `docker-compose.ymal` 
 
-```
-URL_HOST: ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000
+```yaml
+- URL_HOST: ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000
 ```
 
 
@@ -124,7 +125,9 @@ TWILIO_AUTH_TOKEN: <my_twilio_token>
   - Run the rails command line: `rails console`
   - Run `Account.update_all(state: "active")`
   - Then exit the rails console and exit the container.
-  - Stop and restart it.
+  - Rester the Barong container.
+
+
 
 #### Peatio
 
@@ -138,7 +141,7 @@ TWILIO_AUTH_TOKEN: <my_twilio_token>
 2. And set your callback URL
 
 ```yaml
-BARONG_OAUTH2_REDIRECT_URL: http://ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000/auth/barong/callback
+- BARONG_OAUTH2_REDIRECT_URL: http://ec2-xx-xxx-xxx-xxx.compute-1.amazonaws.com:8000/auth/barong/callback
 ```
 
 3. Start peatio server: `docker-compose up -d peatio`
@@ -162,10 +165,10 @@ bundle install
 bin/init_config
 ```
 
-Edit the `/config/application.yml` and set your app DNS.  Ex: 
+Edit the `/config/docker-compose.yaml` and set your app DNS:
 
-```shell
-PLATFORM_ROOT_URL: http://ec2-xx-xx-xxx-xxx.compute-1.amazonaws.com
+```ymal
+- PLATFORM_ROOT_URL: http://ec2-xx-xx-xxx-xxx.compute-1.amazonaws.com
 ```
 
 Refer to the release note here : https://github.com/rubykube/peatio/blob/master/docs/releases/1.5.0.md
@@ -176,7 +179,7 @@ Refer to the release note here : https://github.com/rubykube/peatio/blob/master/
 
 ### Install nginx to setup a reverse proxy
 
-```
+```shell
 sudo apt-get update
 sudo apt-get install nginx
 sudo ufw allow 'Nginx HTTP'
